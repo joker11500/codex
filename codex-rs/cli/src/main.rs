@@ -53,8 +53,8 @@ struct MultitoolCli {
 #[derive(Debug, clap::Subcommand)]
 enum Subcommand {
     /// Run Codex non-interactively.
-    #[clap(visible_alias = "e")]
-    Exec(ExecCli),
+    #[clap(visible_aliases = ["exec", "e"])]
+    Run(ExecCli),
 
     /// Manage login.
     Login(LoginCommand),
@@ -217,7 +217,7 @@ async fn cli_main(codex_linux_sandbox_exe: Option<PathBuf>) -> anyhow::Result<()
             let exit_info = codex_tui::run_main(interactive, codex_linux_sandbox_exe).await?;
             print_exit_messages(exit_info);
         }
-        Some(Subcommand::Exec(mut exec_cli)) => {
+        Some(Subcommand::Run(mut exec_cli)) => {
             prepend_config_flags(
                 &mut exec_cli.config_overrides,
                 root_config_overrides.clone(),

@@ -9,7 +9,7 @@ Run Codex head-less in pipelines. Example GitHub Action step:
   run: |
     npm install -g @openai/codex
     codex login --api-key "${{ secrets.OPENAI_KEY }}"
-    codex exec --full-auto "update CHANGELOG for next release"
+    codex run --full-auto "update CHANGELOG for next release"
 ```
 
 ### Resuming non-interactive sessions
@@ -26,19 +26,19 @@ codex resume <SESSION_ID>
 
 Compatibility:
 
-- Latest source builds include `codex exec resume` (examples below).
-- Current released CLI may not include this yet. If `codex exec --help` shows no `resume`, use the workaround in the next subsection.
+- Latest source builds include `codex run resume` (examples below).
+- Current released CLI may not include this yet. If `codex run --help` shows no `resume`, use the workaround in the next subsection. (`codex exec` remains available as an alias.)
 
 ```shell
 # Resume the most recent recorded session and run with a new prompt (source builds)
-codex exec "ship a release draft changelog" resume --last
+codex run "ship a release draft changelog" resume --last
 
 # Alternatively, pass the prompt via stdin (source builds)
 # Note: omit the trailing '-' to avoid it being parsed as a SESSION_ID
-echo "ship a release draft changelog" | codex exec resume --last
+echo "ship a release draft changelog" | codex run resume --last
 
 # Or resume a specific session by id (UUID) (source builds)
-codex exec resume 7f9f9a2e-1b3c-4c7a-9b0e-123456789abc "continue the task"
+codex run resume 7f9f9a2e-1b3c-4c7a-9b0e-123456789abc "continue the task"
 ```
 
 Notes:
@@ -56,7 +56,7 @@ The TUI defaults to `RUST_LOG=codex_core=info,codex_tui=info` and log messages a
 tail -F ~/.codex/log/codex-tui.log
 ```
 
-By comparison, the non-interactive mode (`codex exec`) defaults to `RUST_LOG=error`, but messages are printed inline, so there is no need to monitor a separate file.
+By comparison, the non-interactive mode (`codex run`, also available as `codex exec`) defaults to `RUST_LOG=error`, but messages are printed inline, so there is no need to monitor a separate file.
 
 See the Rust documentation on [`RUST_LOG`](https://docs.rs/env_logger/latest/env_logger/#enabling-logging) for more information on the configuration options.
 

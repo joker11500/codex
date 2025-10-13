@@ -6,7 +6,7 @@
 | ------------------ | ---------------------------------- | ------------------------------- |
 | `codex`            | Interactive TUI                    | `codex`                         |
 | `codex "..."`      | Initial prompt for interactive TUI | `codex "fix lint errors"`       |
-| `codex exec "..."` | Non-interactive "automation mode"  | `codex exec "explain utils.ts"` |
+| `codex run "..."` | Non-interactive "automation mode"  | `codex run "explain utils.ts"` |
 
 Key flags: `--model/-m`, `--ask-for-approval/-a`.
 
@@ -44,6 +44,10 @@ codex --full-auto "create the fanciest todo-list app"
 That's it - Codex will scaffold a file, run it inside a sandbox, install any
 missing dependencies, and show you the live result. Approve the changes and
 they'll be committed to your working directory.
+
+> [!TIP]
+> `codex exec` remains available as an alias for `codex run` if you prefer the
+> previous command name.
 
 ### Example prompts
 
